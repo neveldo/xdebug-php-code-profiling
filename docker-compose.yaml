@@ -5,7 +5,8 @@ services:
     build: php-fpm
     volumes:
       - ./:/var/www/codeprofiling
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   codeprofiling-nginx:
     container_name: codeprofiling-nginx
     image: nginx

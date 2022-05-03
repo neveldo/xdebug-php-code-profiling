@@ -3,6 +3,13 @@ FROM php:8.1-fpm
 ARG userid
 ARG groupid
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode=debug,develop,profile" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request=trigger" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.output_dir=/var/www/codeprofiling/profiles" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 RUN apt-get update -yqq \
     &&  apt-get install -yqq git unzip
 
