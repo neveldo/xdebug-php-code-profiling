@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  codeprofiling-php-fpm:
+    container_name: codeprofiling-php-fpm
+    build: php-fpm
+    volumes:
+      - ./:/var/www/codeprofiling
+
+  codeprofiling-nginx:
+    container_name: codeprofiling-nginx
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/codeprofiling
+      - ./nginx/codeprofiling.conf:/etc/nginx/conf.d/default.conf
